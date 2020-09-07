@@ -4,7 +4,7 @@ $(function () {
   }
 
   function getDate(dateObj) {
-    if (dateObj instanceof Date) return dateObj.getFullYear() + "0" + get2digits(dateObj.getMonth() + 1) + "-" + get2digits(dateObj.getDate());
+    if (dateObj instanceof Date) return dateObj.getFullYear() + "-" + get2digits(dateObj.getMonth() + 1) + "-" + get2digits(dateObj.getDate());
   }
 
   function getTime(dateObj) {
@@ -12,8 +12,8 @@ $(function () {
   }
 
   function convertDate() {
-    $("[date-date]").each(function (index, element) {
-      var dateString = $(element).date("date");
+    $("[data-date]").each(function (index, element) {
+      var dateString = $(element).data("date");
       if (dateString) {
         var date = new Date(dateString);
         $(element).html(getDate(date));
@@ -22,8 +22,8 @@ $(function () {
   }
 
   function convertDateTime() {
-    $("[date-date-time]").each(function (index, element) {
-      var dateString = $(element).date("date-time");
+    $("[data-date-time]").each(function (index, element) {
+      var dateString = $(element).data("date-time");
       if (dateString) {
         var date = new Date(dateString);
         $(element).html(getDate(date) + " " + getTime(date));
