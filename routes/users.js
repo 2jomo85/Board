@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/User");
+var util = require("../util");
 
 // Index
 router.get("/", function (req, res) {
@@ -24,7 +25,7 @@ router.post("/", function (req, res) {
   User.create(req.body, function (err, user) {
     if (err) {
       req.flash("user", req.body);
-      req.flash("errors", parseError(err));
+      req.flash("errors", util.parseError(err));
       return res.redirect("/users/new");
     }
     res.redirect("/users");
@@ -71,7 +72,7 @@ router.put("/:username", function (req, res, next) {
       user.save(function (err, user) {
         if (err) {
           req.flash("user", req.body);
-          req.flashh("errors", parseError(err));
+          req.flashh("errors", util.parseError(err));
           return res.redirect("/users/" + req.params.username + "/edit");
         }
         res.redirect("/users/" + user.username);
@@ -88,17 +89,3 @@ router.delete("/:username", function (req, res) {
 });
 
 module.exports = router;
-
-// functions
-function parseError(errors) {
-  var parsed = {};
-  if (errors.name == "ValidationError") {
-    for (var name in errors.errors) {
-      var validationError = errors.errors[name];
-      parsed[name] = { message: validationError.message };
-    }
-  } else if (errors.code == "11000" && errors.errmsg.indexof("username") > 0) {
-    parsed.username = { message: "This username already exists!" };
-  }
-  return parsed;
-}
