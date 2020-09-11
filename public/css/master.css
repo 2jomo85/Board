@@ -2,7 +2,7 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 .breadcrumb-item {
-  font: size 0.8em !important;
+  font-size: 0.8em !important;
 }
 .ellipsis {
   display: block;
@@ -14,7 +14,12 @@ body {
 
 .board-table {
   table-layout: fixed;
+  width: 100%;
 }
+.board-table .FILL {
+  width: 100%;
+}
+.board-table .author,
 .board-table .date {
   width: 100px;
 }
@@ -27,5 +32,5 @@ body {
 }
 
 .user-form {
-  width: 480px;
+  width: 400px;
 }
